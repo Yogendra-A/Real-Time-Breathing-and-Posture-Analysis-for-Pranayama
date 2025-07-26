@@ -1,13 +1,22 @@
-// src/components/Navbar.jsx
-import React from 'react';
+// components/Navbar.jsx
+import React from "react";
+import { Link } from "react-router-dom";
+import LoginDropdown from "./LoginDropdown";
 
 export default function Navbar() {
   return (
-    <nav className="fixed top-0 w-full bg-white shadow-sm flex justify-between items-center px-6 py-4 z-50">
-      <div className="text-xl font-bold">🫁 Pranayama</div>
-      <div className="space-x-4">
+    <nav className="fixed top-0 left-0 w-full bg-white shadow-md z-50 px-6 py-4 flex justify-between items-center">
+      <Link to="/" className="text-2xl font-bold text-blue-700">
+        🫁 Pranayama Trainer
+      </Link>
+      <div className="flex gap-4 items-center">
         <LoginDropdown />
-        <button className="text-gray-600 hover:text-black">History</button>
+        <Link
+          to="/history"
+          className="text-gray-600 hover:text-black transition"
+        >
+          History
+        </Link>
       </div>
     </nav>
   );
