@@ -1,19 +1,35 @@
-// src/App.jsx
-import React, { useState } from "react";
-import LandingPage from "./pages/LandingPage";
-import PracticePage from "./pages/PracticePage";
-import HistoryPage from "./pages/HistoryPage";
+// App.jsx
+import React, { useRef } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import HomeSection from "./components/HomeSection";
+import PracticeSection from "./components/PracticeSection";
+import History from "./components/History";
 
-function App() {
-  const [page, setPage] = useState("landing");
+export default function App() {
+  const practiceRef = useRef(null);
+
+  const scrollToPractice = () => {
+    practiceRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-800">
-      {page === "landing" && <LandingPage onStart={() => setPage("practice")} />}
-      {page === "practice" && <PracticePage onHistory={() => setPage("history")} />}
-      {page === "history" && <HistoryPage onBack={() => setPage("practice")} />}
-    </div>
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <HomeSection onGetStarted={scrollToPractice} />
+              <div ref={practiceRef}>
+                <PracticeSection />
+              </div>
+            </>
+          }
+        />
+        <Route path="/history" element={<History />} />
+      </Routes>
+    </Router>
   );
 }
-
-export default App;
