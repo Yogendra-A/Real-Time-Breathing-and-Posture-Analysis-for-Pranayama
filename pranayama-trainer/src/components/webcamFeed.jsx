@@ -26,13 +26,17 @@ export default function WebcamFeed({ isActive }) {
   }, [isActive]);
 
   return (
-    <div className="aspect-video border border-gray-300 rounded-lg overflow-hidden bg-black">
+    <div
+      className="aspect-video border border-gray-300 rounded-lg overflow-hidden bg-black"
+      style={{ minHeight: "400px", minWidth: "700px" }}
+    >
       <video
         ref={webcamRef}
         autoPlay
         muted
         playsInline
         className="w-full h-full object-cover"
+        style={{ minHeight: "400px", minWidth: "700px" }}
       />
     </div>
   );
